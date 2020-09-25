@@ -5,6 +5,7 @@ const axios     = require('axios');
 
 /*
     jsonFile {
+        "username"              : "",
         "customerName"          : "",
         "cusomterAge"           : int,
         "serviceOfficerName"    : "",
@@ -18,11 +19,13 @@ const axios     = require('axios');
 var SendForm = function(jsonFile) {
     var formCheck = ValidateForm(jsonFile);
 
+    var user = userModel.getUser(jsonFile.username);
+
     if(formCheck) {
         const data = jsonFile;
         let config = {
             headers: {
-                Authorization: 'Bearer ' + token,
+                Authorization: 'Bearer ' + user.authorization_token,
             }
         }
         axios.post('http://techtrek2020.ap-southeast-1.elasticbeanstalk.com/validateForm', data, config)
@@ -131,4 +134,10 @@ var ValidateImage = function(image) {
 
 var ValidateProductType = function(array) {
     //array = array[string]
+    for( str of array) {
+        if(typeof str != "string") {
+            return false;
+        }
+    }
+    return true;
 };
