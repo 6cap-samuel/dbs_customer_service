@@ -19,48 +19,57 @@ class Validate {
         }
     */
     static SendForm(req, res) {
-        var formCheck = ValidateForm(req);
+        // var formCheck = ValidateForm(req);
 
         var user = userModel.getUser(req.username);
 
-        if(!formCheck) {
-            console.log("Validation failed");
-            res.status(404).send({ validate_status: false });
-        }
-        const data = req;
-            let config = {
-                headers: {
-                    Authorization: 'Bearer ' + user.authorization_token,
-                }
+        // if(!formCheck) {
+        //     console.log("Validation failed");
+        //     res.status(404).send({ validate_status: false });
+        // }
+        const jsonObj = req.body;
+        const params = {cusomterAge: jsonObj.cusomterAge,
+                        cusomterAge: jsonObj.cusomterAge,
+                        serviceOfficerName: jsonObj.serviceOfficerName,
+                        NRIC: jsonObj.NRIC,
+                        registrationTime: jsonObj.registrationTime,
+                        branchCode: jsonObj.branchCode,
+                        image: jsonObj.image,
+                        productType: jsonObj.productType};
+        data.username = "";
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + user.authorization_token,
             }
-            axios.post('http://techtrek2020.ap-southeast-1.elasticbeanstalk.com/validateForm', data, config)
-            .then((res) => {
-                console.log(res.data);
-                res.status(400).send({ validate_status: true} );
-            }).catch((err) => {
-                console.error(err);
-                res.status(404).send({ validate_status: false });
-            });
+        }
+        axios.post('http://techtrek2020.ap-southeast-1.elasticbeanstalk.com/validateForm', params, config)
+        .then((res) => {
+            console.log(res.data);
+            res.status(400).send({ validate_status: true} );
+        }).catch((err) => {
+            console.error(err);
+            res.status(404).send({ validate_status: false });
+        });
     }
 
-    static ValidateForm(jsonFile) {
+    static ValidateForm = function(jsonFile) {
         return (ValidateName(jsonFile.customerName) && ValidateCustomerAge(jsonFile.customerAge) && ValidateNRIC(jsonFile.NRIC) && ValidateRegistrationTime(jsonFile.registrationTime) && ValidateImage(jsonFile.image) && ValidateProductType(jsonFile.productType));
     };
     
-    static ValidateName(name) {
+    static ValidateName = function(name) {
         if(name.length > 64) {
             return false;
         }
         return true;
     };
     
-    static ValidateCustomerAge(age) {
+    static ValidateCustomerAge = function(age) {
         if(age < 18) {
             return false;
         }
     };
     
-    static ValidateNRIC(nric) {
+    static ValidateNRIC = function(nric) {
         var numCount = 0;
         for(var i = 0; i < nric.length; i++) {
             var nricChar = nric.charAt(i);
@@ -76,7 +85,7 @@ class Validate {
         return true;
     };
     
-    static ValidateRegistrationTime(registrationTime) {
+    static ValidateRegistrationTime = function(registrationTime) {
         // DD/MM/YYY HH:mm:ss
         var splitDateTime = registrationTime.split(" ");
         if(splitDateTime.length != 2) {
@@ -134,13 +143,13 @@ class Validate {
         }
     };
     
-    static ValidateImage(image) {
+    static ValidateImage = function(image) {
         //Image is in blob
         //Do later
         return true;
     };
     
-    static ValidateProductType(array) {
+    static ValidateProductType = function(array) {
         //array = array[string]
         for( str of array) {
             if(typeof str != "string") {
