@@ -1,5 +1,6 @@
 const User = require("./user")
 
+
 class Users {
     constructor() {
         this.users = {}

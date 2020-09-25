@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,7 +12,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "ioredis": "^4.17.3",
     "morgan": "^1.10.0",
-    "redis": "^3.0.2"
+    "redis": "^3.0.2",
+    "redis-server": "^1.2.2"
   }
 }
