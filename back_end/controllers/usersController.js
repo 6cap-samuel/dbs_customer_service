@@ -15,12 +15,13 @@ class UsersController {
         axios.post(url + '/login', params)
             .then((result) => {
                 const authorization_token = result.data
-                console.log(result.data)
+                const user = new User(username, authorization_token)
+                saveUser(user)
                 res.status(400).send({ login_status: true });
             })
             .catch((err) => {
                 console.log(err)
-                res.status(404).send({ error: "error help" })
+                res.status(404).send({ login_status: false })
             })
     }
 }
