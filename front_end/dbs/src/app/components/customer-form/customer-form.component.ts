@@ -16,8 +16,8 @@ export class CustomerFormComponent implements OnInit {
   constructor(protected http: HttpClient) { 
   }
 
-  private readonly IPADDRESS: string = ""
-  private readonly CUSTOMERPRODUCTENDPOINT: string = this.IPADDRESS +  "/customer"
+  private readonly IPADDRESS: string = "http://localhost:3000"
+  private readonly CUSTOMERPRODUCTENDPOINT: string = this.IPADDRESS +  "/validate"
   private readonly CUSTOMERNAME: string = "customerName"
   private readonly CUSTOMERAGE: string = "customerAge"
   private readonly SERVICEOFFICERNAME: string = "serviceOfficerName"

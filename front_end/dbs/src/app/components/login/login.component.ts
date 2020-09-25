@@ -15,31 +15,59 @@ export class LoginComponent implements OnInit {
   username: string = ""
   password: string = ""
 
-  ngOnInit() {} 
+  isLoggedIn: boolean = false
+  error : string = ""
+
+  ngOnInit() { 
+    if (localStorage.getItem("username").length != 0){
+      var loginObs : Observable<LoginResult> = this.connectLogin(localStorage.getItem("username"), localStorage.getItem("password"))
+
+      loginObs.subscribe(loginResult => {
+        if (loginResult.login_status){
+          // move to new pag
+          this.isLoggedIn = true
+        } else {
+          this.isLoggedIn = false
+        }
+      })
+      
+    } else {
+      this.isLoggedIn = false
+    }
+   } 
   
   private readonly IPADDRESS: string = "http://localhost:3000/login"
   private readonly LOGIN_ENDPOINT: string = this.IPADDRESS
   private readonly USERNAME: string = "username"
   private readonly PASSWORD: string = "password"
+  
+  rmbMe: boolean = false
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true,
     crossDomain: true,
-    
   };
 
   login(){
+    this.error = "";
     if (this.validateLogin){
       console.log("test")
       console.log(this.username)
       var loginObs : Observable<LoginResult> = this.connectLogin(this.username, this.password)
       loginObs.subscribe(loginResult => {
         if (loginResult.login_status){
-          // move to new page
-          console.log("success")
+          // move to new pag
+          this.isLoggedIn = true
+
+          if (this.rmbMe){
+            localStorage.setItem("username", this.username)
+            localStorage.setItem("password", this.password)
+          }
+
         } else {
-          // show error login
+          this.error = "Wrong Credentials"
+          this.isLoggedIn = false
         }
       })
     } else {

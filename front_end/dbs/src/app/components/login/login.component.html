@@ -67,6 +67,8 @@ span.psw {
 <body>
 
 <h2>Login Form</h2>
+
+<div *ngIf="!isLoggedIn">
   <div class="imgcontainer">
     <img src="img_dbs.png" alt="Avatar" class="avatar">
   </div>
@@ -76,16 +78,19 @@ span.psw {
     
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required [(ngModel)]="password">
+    <div style="color:red">{{error}}</div>
 
     <button nbButton status="success" (click)="login()">Submit</button>
     
     <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
+      <input type="checkbox" checked="checked" name="remember" [(ngModel)]="rmbMe"> Remember me
     </label>
   </div>
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+
+</div>
+  
+  <div *ngIf="isLoggedIn">
+    <app-customer-form></app-customer-form>
   </div>
 </body>
 </html>
