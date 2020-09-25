@@ -1,6 +1,6 @@
-const User = require('../models/user');
+const userModel = require('../models/user');
 const axios = require('axios');
-const { saveUser } = require('../models/user')
+const { saveUser, getUser } = require('../models/user')
 
 const url = "http://techtrek2020.ap-southeast-1.elasticbeanstalk.com";
 
@@ -11,15 +11,23 @@ class UsersController {
         const params = { username: username, password: password }
 
         axios.post(url + '/login', params)
-            .then((result) => {
+            .then(result => {
                 const authorization_token = result.data
-                const user = new User(username, authorization_token)
-                saveUser(user)
+                userModel.saveUser(username, authorization_token)
                 res.status(200).send({ login_status: true });
             })
-            .catch((err) => {
+            .catch(err => {
+                console.log(err)
                 res.status(200).send({ login_status: false })
             })
+    }
+
+    static async extendSession(req, res) {
+
+        const { username } = req.body
+
+        user = await getUser(username)
+
 
     }
 
