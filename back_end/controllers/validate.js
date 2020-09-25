@@ -16,11 +16,15 @@ const axios     = require('axios');
         "productType"           : [""]
     }
 */
-var SendForm = function(jsonFile) {
-    // var formCheck = ValidateForm(jsonFile);
+var SendForm = function(jsonFile, res) {
+    var formCheck = ValidateForm(jsonFile);
 
     var user = userModel.getUser(jsonFile.username);
 
+    if(!formCheck) {
+        console.log("Validation failed");
+        res.status(404).send({ validate_status: false });
+    }
     const data = jsonFile;
         let config = {
             headers: {
