@@ -17,7 +17,7 @@ export class CustomerFormComponent implements OnInit {
   }
 
   private readonly IPADDRESS: string = ""
-  private readonly CUSTOMERPRODUCTENDPOINT: string = this.IPADDRESS +  "/Login"
+  private readonly CUSTOMERPRODUCTENDPOINT: string = this.IPADDRESS +  "/customer"
   private readonly CUSTOMERNAME: string = "customerName"
   private readonly CUSTOMERAGE: string = "customerAge"
   private readonly SERVICEOFFICERNAME: string = "serviceOfficerName"
@@ -42,6 +42,9 @@ export class CustomerFormComponent implements OnInit {
   branchCode: string
   image: Blob
   selectedProducts: string[]
+
+  error: string = ""
+  success: string = ""
 
   customerNameError: boolean
   customerAgeError: boolean
@@ -75,7 +78,24 @@ export class CustomerFormComponent implements OnInit {
   }
   
   validateForm(){
-    
+    console.log("test")
+    var result: Observable<CustomerResult>  = this.submitForm(this.customerName, this.customerAge, this.serviceOfficerName, this.nric, this.registrationTime, this.branchCode, this.image, this.selectedProducts);
+    result.subscribe(customerResult => {
+      if (customerResult.status){
+        // move to new page
+        this.success = "Information Registered"
+        this.customerName = "";
+        this.customerAge = 18;
+        this.serviceOfficerName = "";
+        this.nric = "";
+        this.registrationTime = ""
+        this.branchCode = ""
+        this.selectedProducts = []
+      } else {
+        // show error login
+        this.error = customerResult.error
+      }
+    })
   }
 
   addProduct(code){
