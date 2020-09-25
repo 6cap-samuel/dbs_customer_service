@@ -1,7 +1,11 @@
 const UsersController = require('./controllers/usersController')
+const validate = require('./controllers/validate');
 
 module.exports = (app) => {
     app.post('/login', UsersController.login)
-    // app.get('/clear', RoomController.clearDB)
-    // app.get('/question', QuestionsController.getRandomQuestion);
+
+    app.post("/validate", function (jsonObj) {
+        validate.SendForm(jsonObj);
+    });
+
 }
