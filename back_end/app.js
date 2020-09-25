@@ -3,7 +3,6 @@ const http = require('http');
 const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const validate = require('./validate');
 const { json } = require('express');
 
 const PORT = 3000;
@@ -24,10 +23,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true,
 }));
-
-app.post("/validate", function(jsonObj) {
-    validate.SendForm(jsonObj);
-});
 
 
 //Routes for application

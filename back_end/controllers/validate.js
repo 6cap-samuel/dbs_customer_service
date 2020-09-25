@@ -1,6 +1,6 @@
 const { json } = require("express");
 const https = require('https');
-const userModel = require('./models/user');
+const userModel = require('../models/user');
 const axios     = require('axios');
 
 /*
@@ -31,8 +31,10 @@ var SendForm = function(jsonFile) {
         axios.post('http://techtrek2020.ap-southeast-1.elasticbeanstalk.com/validateForm', data, config)
         .then((res) => {
             console.log(res.data);
+            res.status(400).send({ validate_status: true} );
         }).catch((err) => {
             console.error(err);
+            res.status(404).send({ validate_status: false });
         });
     }
 }
@@ -130,6 +132,7 @@ var ValidateRegistrationTime = function(registrationTime) {
 var ValidateImage = function(image) {
     //Image is in blob
     //Do later
+    return true;
 };
 
 var ValidateProductType = function(array) {
