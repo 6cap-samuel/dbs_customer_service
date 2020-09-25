@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }));
 
+
 //Routes for application
 require('./routes.js')(app);
 
