@@ -36,7 +36,6 @@ class Validate {
                         branchCode: jsonObj.branchCode,
                         image: jsonObj.image,
                         productType: jsonObj.productType};
-        data.username = "";
         let config = {
             headers: {
                 Authorization: 'Bearer ' + user.authorization_token,
