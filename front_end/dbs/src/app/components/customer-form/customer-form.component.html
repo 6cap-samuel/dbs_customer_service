@@ -44,6 +44,9 @@ input[type=submit]:hover {
   background-color: #f2f2f2;
   padding: 20px;
 }
+p.uppercase {
+  text-transform: uppercase;
+}
 </style>
 </head>
 <body>
@@ -53,24 +56,24 @@ input[type=submit]:hover {
 <div class="container">
   <form action="/action_page.php">
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Your name..">
+    <input type="text" id="name" name="name" maxlength="64" placeholder="Your name..">
 
 	<label for="age">Age</label>
-    <input type="number" id="age" name="age" min="0" max="99" placeholder="Your age.."><br><br>
+    <input type="number" id="age" name="age" min="18" max="99" placeholder="Your age.."><br><br>
             
      <label for="soname">Service Officer Name</label>
-    <input type="text" id="soname" name="soname" placeholder="Your service officer name..">
+    <input type="text" id="soname" name="soname" maxlength="64" placeholder="Your service officer name..">
     
-    <label for="nric">NRIC</label>
-    <input type="text" id="nric" name="nric" placeholder="Your NRIC..">
+    <p class="uppercase">NRIC</p>
+    <input type="text" id="nric" name="nric" maxlength="9" placeholder="Your NRIC..">
     
     <label for="regtime">Registration time</label>     
     <input type="regtime" name="regtime" 
         placeholder="dd-mm-yyyy" value=""
         min="1997-01-01" max="2030-12-31"> <br><br>
      
-     <label for="bcode">Branch Code</label>
-    <input type="number" id="bcode" name="bcode" min="0" max="391" placeholder="branch code.."><br><br>
+    <label for="bcode">Branch Code</label>
+    <input type="number" id="bcode" name="bcode" min="0" max="391" maxlength="3" placeholder="branch code.."><br><br>
     
     <form action="/action_page.php">
   <label for="img">Select image:</label>
