@@ -27,12 +27,11 @@ var SendForm = function(jsonFile) {
         }
         axios.post('http://techtrek2020.ap-southeast-1.elasticbeanstalk.com/validateForm', data, config)
         .then((res) => {
-            console.log();
+            console.log(res.data);
         }).catch((err) => {
             console.error(err);
         });
     }
-
 }
 
 var ValidateForm = function(jsonFile) {
@@ -70,10 +69,64 @@ var ValidateNRIC = function(nric) {
 
 var ValidateRegistrationTime = function(registrationTime) {
     // DD/MM/YYY HH:mm:ss
+    var splitDateTime = registrationTime.split(" ");
+    if(splitDateTime.length != 2) {
+        return false;
+    }
+    var date = splitDateTime[0];
+    var time = splitDateTime[1];
+
+    var dateSplit = date.split('/');
+    var day = parseInt(dateSplit[0]);
+    var month = parseInt(dateSplit[1]);
+    var year = parseInt(dateSplit[2]);
+    var timeSplit = time.split(':');
+    var hour = parseInt(timeSplit[0]);
+    var minute = parseInt(timeSplit[1]);
+    var second = parseInt(timeSplit[2]);
+
+    if(month < 1 || month > 12) {
+        return false;
+    }
+    //Check for 31st
+    else if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        if(day < 1 || day > 31) {
+            return false;
+        }
+    }
+    else if(month == 4 || month == 6  || month == 9  || month == 11) {
+        if(day < 1 || day > 30) {
+            return false;
+        }
+    }
+    //Feb
+    else {
+        if (((year % 4 == 0) && (year % 100!= 0)) || (year % 400 == 0)) {
+            if(day < 1 || day > 29) {
+                return false;
+            }
+        }
+        else {
+            if(day < 1 || day > 28) {
+                return false;
+            }
+        }
+    }
+
+    if(hour < 0 || hour > 23) {
+        return false;
+    }
+    else if(minute < 0 || minute > 60) {
+        return false;
+    }
+    else if(second < 0 || second > 60) {
+        return false;
+    }
 };
 
 var ValidateImage = function(image) {
-
+    //Image is in blob
+    //Do later
 };
 
 var ValidateProductType = function(array) {
