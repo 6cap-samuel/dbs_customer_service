@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+input[type=number], select, textarea {
+  width: 50%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+p.uppercase {
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<h3>Customer Form</h3>
+
+<div class="container">
+  <form action="/action_page.php">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" maxlength="64" placeholder="Your name.." (change)="validateForm()">
+	<label for="age">Age</label>
+    <input type="number" id="age" name="age" min="18" max="99" placeholder="Your age.."><br><br>
+            
+     <label for="soname">Service Officer Name</label>
+    <input type="text" id="soname" name="soname" maxlength="64" placeholder="Your service officer name..">
+    
+    <p class="uppercase">NRIC</p>
+    <input type="text" id="nric" name="nric" maxlength="9" placeholder="Your NRIC..">
+    
+    <label for="regtime">Registration time</label>     
+    <input type="regtime" name="regtime" 
+        placeholder="dd-mm-yyyy" value=""
+        min="1997-01-01" max="2030-12-31"> <br><br>
+     
+    <label for="bcode">Branch Code</label>
+    <input type="number" id="bcode" name="bcode" min="0" max="999" maxlength="3" placeholder="branch code.."><br><br>
+    
+    <form action="/action_page.php">
+  <label for="img">Select image:</label>
+  <input type="file" id="img" name="img" accept="image/*">
+  <input type="submit" value="Submit">
+	</form>
+    
+    <label for="text">Product type</label>
+    <select id="ptype" name="ptype">
+      <option value="137">137 : Investor</option>
+      <option value="070">070 : Insurance</option>
+      <option value="291">291 : Loans</option>
+      <option value="969">969 : Savings</option>
+      <option value="555">555 : Credit Cards</option>
+    </select>
+	<br><br><br>
+  <button nbButton status="success" (click)="submitForm()">Submit</button>
+
+  </form>
+</div>
+
+</body>
+</html>
