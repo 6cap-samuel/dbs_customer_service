@@ -30,7 +30,8 @@ function getUser(username) {
     })
 }
 
-function saveUser(userObject) {
+function saveUser(username, authentication_token) {
+    const userObject = new User(username, authentication_token)
     client.set(userObject.username, JSON.stringify(userObject))
 }
 
