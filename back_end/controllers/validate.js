@@ -16,13 +16,16 @@ const axios     = require('axios');
         "productType"           : [""]
     }
 */
-var SendForm = function(jsonFile) {
+var SendForm = function(jsonFile, res) {
     var formCheck = ValidateForm(jsonFile);
 
     var user = userModel.getUser(jsonFile.username);
 
-    if(formCheck) {
-        const data = jsonFile;
+    if(!formCheck) {
+        console.log("Validation failed");
+        res.status(404).send({ validate_status: false });
+    }
+    const data = jsonFile;
         let config = {
             headers: {
                 Authorization: 'Bearer ' + user.authorization_token,
@@ -36,7 +39,6 @@ var SendForm = function(jsonFile) {
             console.error(err);
             res.status(404).send({ validate_status: false });
         });
-    }
 }
 
 var ValidateForm = function(jsonFile) {
