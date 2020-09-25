@@ -34,4 +34,8 @@ function saveUser(userObject) {
     client.set(userObject.username, JSON.stringify(userObject))
 }
 
-module.exports = User
+module.exports = {
+    user: User,
+    getUser: getUser,
+    saveUser: saveUser,
+}
