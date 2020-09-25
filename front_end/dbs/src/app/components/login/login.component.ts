@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {} 
   
-  private readonly IPADDRESS: string = ""
-  private readonly LOGIN_ENDPOINT: string = this.IPADDRESS +  "/Login"
+  private readonly IPADDRESS: string = "http://localhost:3000/login"
+  private readonly LOGIN_ENDPOINT: string = this.IPADDRESS
   private readonly USERNAME: string = "username"
   private readonly PASSWORD: string = "password"
 
@@ -26,16 +26,18 @@ export class LoginComponent implements OnInit {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true,
     crossDomain: true,
+    
   };
 
   login(){
     if (this.validateLogin){
       console.log("test")
       console.log(this.username)
-      var loginObs : Observable<LoginResult> = this.connectLogin(this,username, this.password)
+      var loginObs : Observable<LoginResult> = this.connectLogin(this.username, this.password)
       loginObs.subscribe(loginResult => {
         if (loginResult.login_status){
           // move to new page
+          console.log("success")
         } else {
           // show error login
         }

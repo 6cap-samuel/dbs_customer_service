@@ -56,8 +56,7 @@ p.uppercase {
 <div class="container">
   <form action="/action_page.php">
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" maxlength="64" placeholder="Your name..">
-
+    <input type="text" id="name" name="name" maxlength="64" placeholder="Your name.." (change)="validateForm()">
 	<label for="age">Age</label>
     <input type="number" id="age" name="age" min="18" max="99" placeholder="Your age.."><br><br>
             
@@ -73,7 +72,7 @@ p.uppercase {
         min="1997-01-01" max="2030-12-31"> <br><br>
      
     <label for="bcode">Branch Code</label>
-    <input type="number" id="bcode" name="bcode" min="0" max="391" maxlength="3" placeholder="branch code.."><br><br>
+    <input type="number" id="bcode" name="bcode" min="0" max="999" maxlength="3" placeholder="branch code.."><br><br>
     
     <form action="/action_page.php">
   <label for="img">Select image:</label>
@@ -90,9 +89,8 @@ p.uppercase {
       <option value="555">555 : Credit Cards</option>
     </select>
 	<br><br><br>
-   
+  <button nbButton status="success" (click)="submitForm()">Submit</button>
 
-    <input type="submit" value="Submit">
   </form>
 </div>
 
