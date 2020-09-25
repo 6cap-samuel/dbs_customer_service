@@ -1,14 +1,15 @@
-const Users = require("../models/users");
+const User = require('../models/user')
 
-const Users = require('../models/users')
+const url = "http://techtrek2020.ap-southeast-1.elasticbeanstalk.com"
 
 class UsersController {
-    constructor() {
-        this.users = new Users()
-    }
 
-    login(req, res) {
 
+
+    static login(req, res) {
+        const { username, password } = req.body
+        console.log(username, password)
+        res.status(400).json({ hello: "hello" })
     }
 }
 
