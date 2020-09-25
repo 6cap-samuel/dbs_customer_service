@@ -3,6 +3,7 @@ const http = require('http');
 const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const { json } = require('express');
 
 const PORT = 3000;
 const app = express();
@@ -22,6 +23,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true,
 }));
+
 
 //Routes for application
 require('./routes.js')(app);
