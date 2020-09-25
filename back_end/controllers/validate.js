@@ -18,7 +18,7 @@ class Validate {
             "productType"           : [""]
         }
     */
-    static SendForm = function(req, res) {
+    static SendForm(req, res) {
         var formCheck = ValidateForm(req);
 
         var user = userModel.getUser(req.username);
@@ -43,24 +43,24 @@ class Validate {
             });
     }
 
-    static ValidateForm = function(jsonFile) {
+    static ValidateForm(jsonFile) {
         return (ValidateName(jsonFile.customerName) && ValidateCustomerAge(jsonFile.customerAge) && ValidateNRIC(jsonFile.NRIC) && ValidateRegistrationTime(jsonFile.registrationTime) && ValidateImage(jsonFile.image) && ValidateProductType(jsonFile.productType));
     };
     
-    static ValidateName = function(name) {
+    static ValidateName(name) {
         if(name.length > 64) {
             return false;
         }
         return true;
     };
     
-    static ValidateCustomerAge = function(age) {
+    static ValidateCustomerAge(age) {
         if(age < 18) {
             return false;
         }
     };
     
-    static ValidateNRIC = function(nric) {
+    static ValidateNRIC(nric) {
         var numCount = 0;
         for(var i = 0; i < nric.length; i++) {
             var nricChar = nric.charAt(i);
@@ -76,7 +76,7 @@ class Validate {
         return true;
     };
     
-    static ValidateRegistrationTime = function(registrationTime) {
+    static ValidateRegistrationTime(registrationTime) {
         // DD/MM/YYY HH:mm:ss
         var splitDateTime = registrationTime.split(" ");
         if(splitDateTime.length != 2) {
@@ -134,13 +134,13 @@ class Validate {
         }
     };
     
-    static ValidateImage = function(image) {
+    static ValidateImage(image) {
         //Image is in blob
         //Do later
         return true;
     };
     
-    static ValidateProductType = function(array) {
+    static ValidateProductType(array) {
         //array = array[string]
         for( str of array) {
             if(typeof str != "string") {
