@@ -47,7 +47,7 @@ class Validate {
             res.status(400).send({ validate_status: true} );
         }).catch((err) => {
             console.error(err);
-            res.status(404).send({ validate_status: false });
+            res.status(200).send({ validate_status: false });
         });
     }
 
